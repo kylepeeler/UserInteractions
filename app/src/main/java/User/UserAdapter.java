@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import io.kylepeeler.userinteractions.R;
@@ -28,9 +30,11 @@ public class UserAdapter extends ArrayAdapter<UserEndpoint.User>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
         }
         // Lookup view for data population
+        TextView tvID = (TextView) convertView.findViewById(R.id.tvID);
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
         TextView tvEmail = (TextView) convertView.findViewById(R.id.tvEmail);
         // Populate the data into the template view using the data object
+        tvID.setText("_ID: " + user._id);
         tvName.setText("Username: " + user.name);
         tvEmail.setText("Email: " + user.email);
         // Return the completed view to render on screen
