@@ -1,12 +1,18 @@
 package User;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
+import io.kylepeeler.userinteractions.R;
 import retrofit2.Call;
 
 /**
@@ -14,7 +20,15 @@ import retrofit2.Call;
  */
 public class UserFacade extends AsyncTask<Void, Void, ArrayList<UserEndpoint.User>>{
 
+    private Context mContext;
+    private View view;
 
+
+
+    public UserFacade (Context context, View view){
+        this.mContext = context;
+        this.view = view;
+    }
     public ArrayList<UserEndpoint.User> getUsers() throws IOException{
         return UserGenerator.createService(UserEndpoint.class).listUsers().execute().body();
     }
@@ -30,8 +44,11 @@ public class UserFacade extends AsyncTask<Void, Void, ArrayList<UserEndpoint.Use
     }
 
     @Override
-    protected void onPostExecute(ArrayList<UserEndpoint.User> users) {
+    protected void onPostExecute(final ArrayList<UserEndpoint.User> users) {
         if (users != null){
+            ListView lv1 = (ListView) view.findViewById(R.id.userListView);
+            UserAdapter adapter = new UserAdapter(mContext, users);
+            lv1.setAdapter(adapter);
             for (UserEndpoint.User user : users){
                 System.out.println("User: " + user.toString());
             }
