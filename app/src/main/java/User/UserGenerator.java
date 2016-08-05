@@ -1,8 +1,5 @@
 package User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

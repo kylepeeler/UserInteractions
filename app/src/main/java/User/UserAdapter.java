@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import io.kylepeeler.userinteractions.R;
@@ -17,8 +15,10 @@ import io.kylepeeler.userinteractions.R;
  * Created by Kyle on 8/4/16.
  */
 public class UserAdapter extends ArrayAdapter<UserEndpoint.User>{
+    private ArrayList<UserEndpoint.User> users;
     public UserAdapter(Context context, ArrayList<UserEndpoint.User> users) {
         super(context, 0, users);
+        this.users = users;
     }
 
     @Override
@@ -39,5 +39,9 @@ public class UserAdapter extends ArrayAdapter<UserEndpoint.User>{
         tvEmail.setText("Email: " + user.email);
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    public UserEndpoint.User getItem(int position){
+        return users.get(position);
     }
 }

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import io.kylepeeler.userinteractions.R;
-import retrofit2.http.DELETE;
 
 /**
  * Created by Kyle on 8/4/16.
@@ -34,10 +33,9 @@ public class DeleteUserTask extends AsyncTask<UserEndpoint.User, Void, ArrayList
 
     @Override
     protected ArrayList<UserEndpoint.User> doInBackground(UserEndpoint.User... users) {
-        int numUsersToDelete = users.length;
-        for (int i = 0; i < numUsersToDelete; i++){
+        for (UserEndpoint.User user : users) {
             try {
-                deleteUser(users[i]);
+                deleteUser(user);
             } catch (IOException e) {
                 System.err.println("Could not delete user");
                 e.printStackTrace();

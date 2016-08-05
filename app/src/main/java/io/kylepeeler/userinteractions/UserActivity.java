@@ -3,11 +3,12 @@ package io.kylepeeler.userinteractions;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import User.GetUsersTask;
+import User.UserEndpoint;
 import User.UserFacade;
 
 public class UserActivity extends AppCompatActivity {
@@ -17,11 +18,9 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-         userFacade = new UserFacade(this, findViewById(R.id.userListView));
-        //userFacade.createUser("pleasework", "pleasework@google.com");
-        //userFacade.updateUser("Skjisu-K", "Kyleiscool", "kpeeler@colesmarketing.com");
-        //GetUsersTask userFacade = new GetUsersTask(this, findViewById(R.id.userListView));
-        //userFacade.execute();
+        userFacade = new UserFacade(this, findViewById(R.id.userListView));
+        ListView lv = (ListView) findViewById(R.id.userListView);
+        lv.setOnItemClickListener(mMessageClickedHandler);
     }
 
     public void onPostClick(View v){
@@ -67,6 +66,21 @@ public class UserActivity extends AppCompatActivity {
         }
 
     }
+
+    // Fill in values when clicking on a list item
+    private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id)
+        {
+            UserEndpoint.User userToFill = (UserEndpoint.User) parent.getAdapter().getItem(position);
+            //System.out.println("User to fill: " + userToFill.toString());
+            EditText idField = (EditText) findViewById(R.id.tfID);
+            EditText nameField = (EditText) findViewById(R.id.tfName);
+            EditText emailField = (EditText) findViewById(R.id.tfEmail);
+            idField.setText(userToFill._id);
+            nameField.setText(userToFill.name);
+            emailField.setText(userToFill.email);
+        }
+    };
 
 
 }

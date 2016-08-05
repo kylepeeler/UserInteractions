@@ -34,10 +34,9 @@ public class UpdateUserTask extends AsyncTask<UserEndpoint.User, Void, ArrayList
 
     @Override
     protected ArrayList<UserEndpoint.User> doInBackground(UserEndpoint.User... users) {
-        int numUsersToUpdate = users.length;
-        for (int i = 0; i < numUsersToUpdate; i++){
+        for (UserEndpoint.User user : users) {
             try {
-                updateUser(users[i]);
+                updateUser(user);
             } catch (IOException e) {
                 System.err.println("Could not update user");
                 e.printStackTrace();

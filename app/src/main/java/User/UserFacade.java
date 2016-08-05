@@ -11,7 +11,6 @@ public class UserFacade {
     private View view;
 
     public UserFacade(Context context, View view){
-        //the following must be passed in to the individual tasks
         this.context = context;
         this.view = view;
     }

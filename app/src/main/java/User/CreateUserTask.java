@@ -34,10 +34,9 @@ public class CreateUserTask extends AsyncTask<UserEndpoint.User, Void, ArrayList
 
     @Override
     protected ArrayList<UserEndpoint.User> doInBackground(UserEndpoint.User... users) {
-        int numUsersToCreate= users.length;
-        for (int i = 0; i < numUsersToCreate; i++){
+        for (UserEndpoint.User user : users) {
             try {
-                createUser(users[i]);
+                createUser(user);
             } catch (IOException e) {
                 System.err.println("Could not create user");
                 e.printStackTrace();

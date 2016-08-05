@@ -15,9 +15,9 @@ import retrofit2.http.Path;
  */
 public interface UserEndpoint {
     class User {
-        String _id;
-        String name;
-        String email;
+        public String _id;
+        public String name;
+        public String email;
 
         User setId(String _id){
             this._id = _id;
